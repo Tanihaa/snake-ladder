@@ -2,7 +2,8 @@
  A snake-ladder game along  is constructed in c language
 I.The <time. h>header file contains definitions of functions to get and manipulate date and time information
 II.We create a function called rollDice() to imitate the action of rolling a die with six sides.
-   The playTurn() function represents a player's turn, which involves rolling the dice, adjusting the player's position and managing any encounters with snakes and ladders.
+   The playTurn() function represents a player's turn, which involves rolling the dice, adjusting the player's position and managing any encounters with snakes and 
+    ladders.
    We establish the locations of both snakes and ladders, along with their respective endpoints.
    Within the main() function, we take turns between players and invoke playTurn() until one of them reaches or surpasses position 100.
 let's breakdown the program into simpler steps:
