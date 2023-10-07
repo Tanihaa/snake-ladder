@@ -1,0 +1,68 @@
+ #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+// Function to roll a dice (1-6)
+int rollDice() {
+    return rand() % 6 + 1;
+}
+
+// Function to handle the player's turn
+int playTurn(int player, int *position) {
+    printf("\nPlayer %d, it's your turn!\n", player);
+    printf("Press Enter to roll the dice...");
+    getchar();
+
+    int dice = rollDice();
+    printf("You rolled a %d!\n", dice);
+
+    *position += dice;
+    
+    // Define the snake and ladder positions
+    int snakeLadder[] = {16, 47, 49, 56, 62, 64, 87, 93, 95, 98};
+    int endPosition[] = {6, 26, 11, 53, 19, 60, 24, 73, 75, 78};
+
+    for (int i = 0; i < 10; i++) {
+        if (*position == snakeLadder[i]) {
+            if (*position > endPosition[i]) {
+                printf("Oops, you landed on a snake! Move back to position %d.\n", endPosition[i]);
+                *position = endPosition[i];
+            } else {
+                printf("Congratulations! You climbed a ladder and move to position %d.\n", endPosition[i]);
+                *position = endPosition[i];
+            }
+        }
+    }
+
+    printf("You are now at position %d.\n", *position);
+
+    if (*position >= 100) {
+        printf("\nPlayer %d wins! Congratulations!\n", player);
+        return 1; // Player has won
+    }
+
+    return 0; // Game continues
+}
+
+int main() {
+    srand(time(NULL)); // Initialize random seed
+
+    int player1 = 1, player2 = 2;
+    int position1 = 0, position2 = 0;
+    int currentPlayer = player1;
+
+    printf("Welcome to Snake and Ladder Game!\n");
+
+    while (1) {
+        int gameResult = playTurn(currentPlayer, (currentPlayer == player1) ? &position1 : &position2);
+
+        if (gameResult == 1) {
+            break;
+        }
+
+        // Switch players
+        currentPlayer = (currentPlayer == player1) ? player2 : player1;
+    }
+
+    return 0;
+}
